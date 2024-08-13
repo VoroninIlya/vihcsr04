@@ -1,0 +1,11 @@
+#ignore bakup files
+*.bak
+*.old
+*.user
+
+#ignore build artifacts
+build
+
+#ignore coverage report artifacts
+report
+*.info

@@ -1,0 +1,88 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default-aarch64",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "toolchainFile": "${sourceDir}/cmake/gnu-aarch64-none-linux-gcc.cmake",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
+        "UNITY_ROOT_PATH": "../unity",
+        "UNITY_EXTENSION_FIXTURE": "ON",
+        "UNITY_EXTENSION_MEMORY": "ON"
+      },
+      "environment": {
+        "AARCH64_LINUX_GNU_SYSROOT": "C:/msys64/mingw64/aarch64-none-linux-gnu/libc"
+      }
+    },
+    {
+      "name": "Debug-aarch64",
+      "inherits": "default-aarch64",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "RelWithDebInfo-aarch64",
+      "inherits": "default-aarch64",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "Release-aarch64",
+      "inherits": "default-aarch64",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "default",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "UNITY_ROOT_PATH": "../unity",
+        "UNITY_EXTENSION_FIXTURE": "ON",
+        "UNITY_EXTENSION_MEMORY": "ON"
+      }
+    },
+    {
+      "name": "Win32-Debug",
+      "inherits": "default",
+      "toolchainFile": "${sourceDir}/cmake/i686-w64-mingw32-gcc.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "Win64-Debug",
+      "inherits": "default",
+      "toolchainFile": "${sourceDir}/cmake/x86_64-w64-mingw32-gcc.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "Win32-Debug",
+      "configurePreset": "Win32-Debug"
+    },
+    {
+      "name": "Win64-Debug",
+      "configurePreset": "Win64-Debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "tst_vibuttonctrl",
+      "description": "",
+      "displayName": "",
+      "configurePreset": "Win64-Debug"
+    }
+  ]
+}
