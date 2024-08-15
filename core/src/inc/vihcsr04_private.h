@@ -24,4 +24,54 @@
 
 #include "vihcsr04.h"
 
+/**
+ * @brief Sensor control type
+ * 
+ */
+typedef struct
+{
+  char name[VIHCSR04_NAME_LEN]; /*!< unique name of sensor */
+  const void* triggerPort;      /*!< pointer to the physical port, to witch the trigger pin of sensor is connected*/
+  uint16_t triggerPin;          /*!< pin number, to witch the the trigger pin of sensor is connected*/
+  const void* echoPort;         /*!< pointer to the physical port, to witch the echo pin of sensor is connected*/
+  uint16_t echoPin;             /*!< pin number, to witch the echo pin of sensor is connected*/
+  bool enabled;                 /*!< flag to enabled/disable if messurement */
+  VIHCSR04_MeasureMode_t mode;  /*!< messurement mode */
+  float temperature;            /*!< current environment temperature */
+  uint16_t maxDistanceCm;       /*!< maximal measured distance */
+  const void* userContext;      /*!< user context that is returned by calling distCb */
+  VIHCSR04_Distance_t distCb;   /*!< call-back funktion will be called if meassurement is done */
+} Sensor_t;
+
+/**
+ * @brief Initialize a semsor handler
+ * 
+ * @param button Pointer to a sensor control structur
+ * @param name Unique name of a new sensor
+ * @param triggerPort Pointer to a GPIO structur to witch the trigger pin of sensor is connected
+ * @param triggerPin A pin number, to witch the the trigger pin of sensor is connected
+ * @param echoPort Pointer to a GPIO structur, to witch the echo pin of sensor is connected
+ * @param echoPin A pin number, to witch the echo pin of sensor is connected
+ * @return true if initialization is successful
+ * @return false if initialization is failed
+ */
+static bool Init(Sensor_t* sensor, const char* name, 
+  const void* triggerPort, uint16_t triggerPin, 
+  const void* echoPort, uint16_t echoPin);
+
+/**
+ * @brief Find sensor by name in array of initialized sensors
+ * 
+ * @param name Sensor name to search
+ * @return int32_t index of found sensor, if no button found returns -1
+ */
+static int32_t FindSensorByName(const char* name);
+
+/**
+ * @brief Button runtime
+ * 
+ * @param button Pointer to a sensor control structur
+ */
+static float Runtime(Sensor_t* sensor);
+
 #endif // VIHCSR04_PRIVATE_H
