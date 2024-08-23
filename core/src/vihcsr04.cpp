@@ -36,6 +36,7 @@ namespace vihcsr04 {
 
   Hcsr04Sensor::~Hcsr04Sensor() {
     m_sensors.clear();
+    m_sensorsPtr.clear();
   }
 
   bool Hcsr04Sensor::AddSensor(const std::string& name, 
